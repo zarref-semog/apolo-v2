@@ -1,11 +1,6 @@
 from rest_framework import viewsets, permissions
-from .models import Stage, PalletInfo, ReleasedPallet, OnHoldPallet, RejectedPallet
-from .serializers import (
-    PalletSerializer,
-    ReleasedPalletSerializer,
-    OnHoldPalletSerializer,
-    RejectedPalletSerializer,
-)
+from .models import Stage, PalletInfo
+from .serializers import PalletSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
@@ -83,21 +78,3 @@ class PalletInfoViewSet(viewsets.ModelViewSet):
 
         serializer = self.get_serializer(obj)
         return Response(serializer.data, status=status.HTTP_200_OK if not created else status.HTTP_201_CREATED)
-
-
-class ReleasedPallet(viewsets.ModelViewSet):
-    queryset = ReleasedPallet.objects.all()
-    serializer_class = ReleasedPalletSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class OnHoldPalletPallet(viewsets.ModelViewSet):
-    queryset = OnHoldPallet.objects.all()
-    serializer_class = OnHoldPalletSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class RejectedPallet(viewsets.ModelViewSet):
-    queryset = RejectedPallet.objects.all()
-    serializer_class = RejectedPalletSerializer
-    permission_classes = [permissions.IsAuthenticated]

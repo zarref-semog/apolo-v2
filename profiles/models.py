@@ -12,10 +12,13 @@ class Profile(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=50, choices=Role.choices)
-    registry = models.CharField(max_length=50, null=False, blank=False)
+    registry = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     token = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return f"Profile {self.user.first_name} ({self.registry})"
 
     class Meta:
         constraints = [
@@ -28,4 +31,3 @@ class Profile(models.Model):
         if self.role in [Role.MANAGER, Role.EMPLOYEE] and self.company:
             return self.company.id == company_id
         return False
-

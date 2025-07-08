@@ -96,6 +96,15 @@ DATABASES = {
     }
 }
 
+# MinIO
+MINIO_STORAGE = {
+    'ENDPOINT': 'minio.local:9000',
+    'ACCESS_KEY': 'minioadmin',
+    'SECRET_KEY': 'minioadmin',
+    'BUCKET': 'reports',
+    'SECURE': False,  # True se usar HTTPS
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
